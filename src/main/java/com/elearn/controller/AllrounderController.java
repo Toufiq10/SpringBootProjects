@@ -1,34 +1,32 @@
 package com.elearn.controller;
 
+
 import com.elearn.Entity.Allrounder;
-import com.elearn.Exceptions.ApiException;
-import com.elearn.Respository.AllRounderRepo;
 import com.elearn.Service.AllRounderService;
 
-import java.util.Arrays;
+import static com.elearn.util.ConstantsValue.*;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/AllRounders")
+@RequestMapping(ALLROUNDERURL)
 public class AllrounderController { 
 
     @Autowired
     AllRounderService service;
 
-    @PostMapping("/addAllRounder")
+    @PostMapping(ADDALLROUNDER)
     public Allrounder addCricketer(@RequestBody Allrounder bat) {
         return service.addCricketer(bat);
     }
-    @GetMapping("/findAllrounder")
+    @GetMapping(GETALLROUNDER)
     public Optional<Allrounder> showCricketer(@RequestParam String name) {
     	return service.showCricketer(name);
     }
     
-    @DeleteMapping("/deleteAllrounder")
+    @DeleteMapping(DELETEALLROUNDER)
     public String deletebatsmen(@RequestParam String name) {
     	service.deleteAllRounder(name);
         return "Player Deleted Successfully";

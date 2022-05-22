@@ -3,6 +3,8 @@ package com.elearn.ServiceImpl;
 import java.util.Arrays;
 import java.util.Optional;
 
+import static com.elearn.util.ConstantsValue.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -35,7 +37,7 @@ public class AllRounderServiceImpl implements AllRounderService {
 	@Override
 	public String deleteAllRounder(@RequestParam String name) {
         repo.deleteById(name);
-        return "Player Deleted Successfully";
+        return DELETEMESSAGE;
     }
 
 }

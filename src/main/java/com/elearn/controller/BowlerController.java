@@ -1,36 +1,33 @@
 package com.elearn.controller;
 
 import com.elearn.Entity.Bowlers;
-import com.elearn.Exceptions.ApiException;
-import com.elearn.Respository.BowlerRepo;
+import com.elearn.Service.BowlerService;
 
-import java.util.Arrays;
+import static com.elearn.util.ConstantsValue.*;
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/Bowlers")
+@RequestMapping(BOWLERROUNDERURL)
 public class BowlerController {
-    @Autowired
-    BowlerRepo repo;
+    
+	@Autowired
+	BowlerService service;
+	
 
-    @PostMapping("/addBowler")
+    @PostMapping(ADDBOWLER)
     public Bowlers addCricketer(@RequestBody Bowlers bat) {
-        return repo.save(bat);
+        return service.addCricketer(bat);
     }
-    @GetMapping("/findBowler")
+    @GetMapping(GETBOWLER)
     public Optional<Bowlers> showCricketer(@RequestParam String name) {
-    	if(repo.findById(name).isEmpty()) {
-     	   throw new ApiException(HttpStatus.NOT_FOUND, Arrays.asList("The Bowler named "+name+" doesn't exits"));
-        }
-    return repo.findById(name);
+    	return service.showCricketer(name);
     }
-    @DeleteMapping("/deleteBowler")
+    @DeleteMapping(DELETEBOWLER)
     public String deletebatsmen(@RequestParam String name) {
-        repo.deleteById(name);
-        return "Player " +name +" Deleted Successfully";
+        return service.deletebatsmen(name);
     }
 }
